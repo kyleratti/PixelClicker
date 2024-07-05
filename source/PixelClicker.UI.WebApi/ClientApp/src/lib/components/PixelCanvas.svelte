@@ -51,7 +51,7 @@
 
 				<td class="p-0 w-max h-max leading-[0]">
 					<Pixel hexColor={pixelColor ?? defaultColor}
-								 showBorder={pixelColor === null}
+								 showBorder={pixelColor === null || pixelColor === defaultColor}
 								 on:selected={() => onPixelSelected({ x, y, hexColor: selectedColor })} />
 				</td>
 			{/each}
