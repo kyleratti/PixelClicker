@@ -1,0 +1,34 @@
+name: "Deploy"
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_tag:
+        description: "The tag to deploy"
+        required: true
+        type: string
+
+# Allow one run of this workflow per branch and cancel existing runs if triggered again
+concurrency:
+  group: pixel-clicker-deploy--production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: kyleratti/actions/.github/actions/deploy-container@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          project_id: "PixelClicker"
+          release_tag: ${{ github.event.inputs.deploy_tag }}
+          repo_source_directory: ./source
+          ssh_deploy_host: ${{ secrets.SSH_DEPLOY_HOST }}
+          ssh_deploy_port: ${{ secrets.SSH_DEPLOY_PORT }}
+          ssh_deploy_user: ${{ secrets.SSH_DEPLOY_USER }}
+          ssh_deploy_key: ${{ secrets.SSH_DEPLOY_KEY }}
+          docker_compose_file: ${{ vars.DOCKER_COMPOSE_FILE }}
+          dockerfile_working_directory: ${{ vars.DOCKERFILE_WORKING_DIRECTORY }}
+          docker_build_args: --build-arg BUILD_CLIENT_APP=true

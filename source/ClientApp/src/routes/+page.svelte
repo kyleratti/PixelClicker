@@ -43,7 +43,7 @@
 		fetchFullCanvasConfig();
 
 		const connection = new signalR.HubConnectionBuilder()
-			.withUrl(apiUrl + "/hub")
+			.withUrl(apiUrl + "hub")
 			.build();
 
 		connection.on("NewPixel", (data: NewPixelData) => {

@@ -8,7 +8,7 @@ export type CanvasConfig = {
 };
 
 const getData = async () => {
-	const resp = await fetch(apiUrl + "/canvas");
+	const resp = await fetch(apiUrl + "canvas");
 
 	if (!resp.ok) {
 		throw new Error("Failed to fetch canvas data");

@@ -4,7 +4,9 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
+		"prebuild": "rimraf ./dist",
 		"build": "vite build",
+		"copy-to-wwwroot": "shx cp -r ./dist/* ../PixelClicker.UI.WebApi/wwwroot/",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -26,6 +28,8 @@
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"prettier-plugin-tailwindcss": "^0.6.4",
+		"rimraf": "^5.0.7",
+		"shx": "^0.3.4",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
 		"tailwindcss": "^3.4.4",

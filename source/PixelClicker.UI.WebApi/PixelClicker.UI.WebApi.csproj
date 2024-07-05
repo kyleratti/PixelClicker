@@ -18,8 +18,13 @@
       </Content>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="wwwroot\" />
-    </ItemGroup>
+    <Target Name="InstallFrontendDependencies" BeforeTargets="Build" Condition="'$(BuildClientApp)' == 'true'">
+        <Exec Command="npm install" WorkingDirectory="..\ClientApp" />
+    </Target>
+
+    <Target Name="AfterBuild" BeforeTargets="InstallFrontendDependencies" Condition="'$(BuildClientApp)' == 'true'">
+        <Exec Command="npm run build" WorkingDirectory="..\ClientApp" />
+        <Exec Command="npm run copy-to-wwwroot" WorkingDirectory="..\ClientApp" />
+    </Target>
 
 </Project>
