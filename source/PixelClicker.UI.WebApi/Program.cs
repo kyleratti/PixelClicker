@@ -16,7 +16,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 
 var app = builder.Build();
-
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
