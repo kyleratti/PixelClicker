@@ -26,7 +26,7 @@
 	let socketState: ExternalResourceState<signalR.HubConnection> = { kind: "pending" };
 	let isInitialized = [$canvasConfig, socketState]
 		.every(x => x.kind === "done" || x.kind === "error");
-	let initializationErrors: string[] = [$canvasConfig, socketState]
+	$: initializationErrors = [$canvasConfig, socketState]
 		.map(selectError)
 		.filter(isNotNull);
 
@@ -94,17 +94,13 @@
 		{/each}
 	</div>
 {:else}
-	<div>
-		<h2 class="text-2xl font-bold">Color</h2>
+	<div class="m-4">
+		<h2 class="text-2xl font-bold mb-2">Color</h2>
 
 		<ColorPresetPicker {selectedColor} on:colorSelected={e => selectedColor = e.detail} />
 	</div>
 
-	<div>
-		<h2 class="text-2xl font-bold">
-			Pixel Canvas
-		</h2>
-
+	<div class="m-4">
 		<PixelCanvas width={$canvasConfig.value.width}
 								 height={$canvasConfig.value.height}
 								 pixelData={$pixelData}
