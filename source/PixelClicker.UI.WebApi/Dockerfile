@@ -21,7 +21,6 @@ COPY ["PixelClicker.UI.WebApi.csproj", "./"]
 RUN dotnet restore "PixelClicker.UI.WebApi.csproj"
 COPY . .
 WORKDIR "/src"
-RUN ls -al ./ClientApp/
 RUN dotnet build "PixelClicker.UI.WebApi.csproj" --no-restore -c $BUILD_CONFIGURATION -o /app/build /p:BuildClientApp=$BUILD_CLIENT_APP
 
 FROM build AS publish
