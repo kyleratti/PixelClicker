@@ -24,6 +24,7 @@
 
     <Target Name="InstallFrontendDependencies" BeforeTargets="Build" Condition="'$(BuildClientApp)' == 'true'">
         <Exec Command="npm ci" WorkingDirectory=".\ClientApp" />
+        <Exec Command="npm run check" WorkingDirectory=".\ClientApp" />
         <Exec Command="npm run build" WorkingDirectory=".\ClientApp" />
         <Exec Command="npm run copy-to-wwwroot" WorkingDirectory=".\ClientApp" />
     </Target>
