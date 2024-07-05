@@ -1,0 +1,6 @@
+@PixelClicker.UI.WebApi_HostAddress = http://localhost:5078
+
+GET {{PixelClicker.UI.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

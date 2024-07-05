@@ -1,0 +1,6 @@
+﻿services:
+  pixelclicker.ui.webapi:
+    image: pixelclicker.ui.webapi
+    build:
+      context: .
+      dockerfile: PixelClicker.UI.WebApi/Dockerfile
