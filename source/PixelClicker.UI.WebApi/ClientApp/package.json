@@ -6,7 +6,7 @@
 		"dev": "vite dev",
 		"prebuild": "rimraf ./dist",
 		"build": "vite build",
-		"copy-to-wwwroot": "shx cp -r ./dist/* ../PixelClicker.UI.WebApi/wwwroot/",
+		"copy-to-wwwroot": "shx cp -r ./dist/* ../wwwroot/",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
