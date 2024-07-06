@@ -29,6 +29,7 @@
 	$: initializationErrors = [$canvasConfig, socketState]
 		.map(selectError)
 		.filter(isNotNull);
+	let connectedUserCount = 0;
 
 	let sendNewPixel: (opts: { x: number; y: number; hexColor: string }) => void;
 	let selectedColor: string = "#000000";
@@ -53,16 +54,25 @@
 			pixelData.set($pixelData);
 		});
 
+		connection.on("UserCount", (count: number) => {
+			connectedUserCount = count;
+		});
 
 		connection.onclose(() => {
 			console.log('disconnected');
 			socketState = { kind: "error", error: "Connection closed." };
 		});
 
+		connection.onreconnecting(() => {
+			console.log('reconnecting...');
+			socketState = { kind: "pending" };
+		});
+
 		connection.onreconnected(() => {
 			console.log('reconnected!');
 			socketState = { kind: "done", value: connection };
 		});
+
 		connection.start()
 			.then(() => {
 				console.log('connected!');
@@ -84,6 +94,7 @@
 
 	const onPixelSelected = (event: CustomEvent<OnPixelSelectedEvent>) => {
 		console.log("pixel selected");
+
 		sendNewPixel({
 			x: event.detail.x,
 			y: event.detail.y,
@@ -92,8 +103,17 @@
 	};
 </script>
 
-<h1 class="text-4xl font-bold">
+<h1 class="text-4xl font-bold my-4">
 	Pixel Clicker
+	<small class="text-sm">
+		{#if socketState.kind === "done"}
+			✅
+		{:else if socketState.kind === "pending"}
+			🔄
+		{:else if socketState.kind === "error"}
+			❌
+		{/if}
+	</small>
 </h1>
 
 {#if $canvasConfig.kind === "pending" || socketState.kind === "pending"}
@@ -105,13 +125,21 @@
 		{/each}
 	</div>
 {:else}
-	<div class="m-4">
+	<div class="my-4">
+		{#if connectedUserCount === 1}
+			You're clicking by yourself - for now.
+		{:else if connectedUserCount > 1}
+			There's <span class="font-bold">{connectedUserCount}</span> people clicking right now.
+		{/if}
+	</div>
+
+	<div class="my-4">
 		<h2 class="text-2xl font-bold mb-2">Color</h2>
 
 		<ColorPresetPicker {selectedColor} on:colorSelected={e => selectedColor = e.detail} />
 	</div>
 
-	<div class="m-4">
+	<div class="my-4">
 		<PixelCanvas width={$canvasConfig.value.width}
 								 height={$canvasConfig.value.height}
 								 pixelData={$pixelData}
