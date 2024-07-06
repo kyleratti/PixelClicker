@@ -44,6 +44,7 @@
 
 		const connection = new signalR.HubConnectionBuilder()
 			.withUrl(apiUrl + "hub")
+			.withAutomaticReconnect()
 			.build();
 
 		connection.on("NewPixel", (data: NewPixelData) => {
@@ -52,6 +53,16 @@
 			pixelData.set($pixelData);
 		});
 
+
+		connection.onclose(() => {
+			console.log('disconnected');
+			socketState = { kind: "error", error: "Connection closed." };
+		});
+
+		connection.onreconnected(() => {
+			console.log('reconnected!');
+			socketState = { kind: "done", value: connection };
+		});
 		connection.start()
 			.then(() => {
 				console.log('connected!');
