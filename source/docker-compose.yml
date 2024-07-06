@@ -4,3 +4,9 @@
     build:
       context: .
       dockerfile: PixelClicker.UI.WebApi/Dockerfile
+
+  pixelclicker.ui.webapi-1:
+    image: pixelclicker.ui.webapi-1
+    build:
+      context: .
+      dockerfile: PixelClicker.UI.WebApi/Dockerfile
