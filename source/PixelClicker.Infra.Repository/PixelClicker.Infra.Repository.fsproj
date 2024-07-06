@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="PixelCanvas.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PixelClicker.Core.Contracts\PixelClicker.Core.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FruityFoundation.DataAccess.Abstractions.FSharp" Version="1.12.0" />
+      <PackageReference Include="FSharp.Control.TaskSeq" Version="0.4.0" />
+      <PackageReference Update="FSharp.Core" Version="8.0.300" />
+    </ItemGroup>
+
+</Project>

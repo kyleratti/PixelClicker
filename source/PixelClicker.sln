@@ -12,6 +12,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9904039E-9A11-4FF1-A4C5-9B0E8D698FC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelClicker.Infra.DatabaseMaintenance", "PixelClicker.Infra.DatabaseMaintenance\PixelClicker.Infra.DatabaseMaintenance.csproj", "{3B918763-69F2-45BC-BFC3-47E800BD4510}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelClicker.UI.DbMaintenanceRunner", "PixelClicker.UI.DbMaintenanceRunner\PixelClicker.UI.DbMaintenanceRunner.csproj", "{3E1789A3-3AFC-4AB4-95D0-5DC6A19F1C1F}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PixelClicker.Infra.Repository", "PixelClicker.Infra.Repository\PixelClicker.Infra.Repository.fsproj", "{01A5EEF1-E216-47E7-B19E-2380BA878C1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{41F217BD-DE04-483D-AC27-3B91B2B113D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelClicker.Core.Contracts", "PixelClicker.Core.Contracts\PixelClicker.Core.Contracts.csproj", "{89C2CEAF-C951-41EB-9F1F-DDB302683F07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelClicker.Core.Models", "PixelClicker.Core.Models\PixelClicker.Core.Models.csproj", "{A2274E91-9364-4CFE-BFEF-32A7461671D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +36,36 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ECE0836F-DAC4-41E7-A04C-C7FD82868857} = {6A95364F-8C86-49C1-B48B-FD2C6675A162}
+		{3B918763-69F2-45BC-BFC3-47E800BD4510} = {9904039E-9A11-4FF1-A4C5-9B0E8D698FC9}
+		{3E1789A3-3AFC-4AB4-95D0-5DC6A19F1C1F} = {6A95364F-8C86-49C1-B48B-FD2C6675A162}
+		{01A5EEF1-E216-47E7-B19E-2380BA878C1D} = {9904039E-9A11-4FF1-A4C5-9B0E8D698FC9}
+		{89C2CEAF-C951-41EB-9F1F-DDB302683F07} = {41F217BD-DE04-483D-AC27-3B91B2B113D7}
+		{A2274E91-9364-4CFE-BFEF-32A7461671D8} = {41F217BD-DE04-483D-AC27-3B91B2B113D7}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ECE0836F-DAC4-41E7-A04C-C7FD82868857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECE0836F-DAC4-41E7-A04C-C7FD82868857}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECE0836F-DAC4-41E7-A04C-C7FD82868857}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECE0836F-DAC4-41E7-A04C-C7FD82868857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B918763-69F2-45BC-BFC3-47E800BD4510}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B918763-69F2-45BC-BFC3-47E800BD4510}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B918763-69F2-45BC-BFC3-47E800BD4510}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B918763-69F2-45BC-BFC3-47E800BD4510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1789A3-3AFC-4AB4-95D0-5DC6A19F1C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1789A3-3AFC-4AB4-95D0-5DC6A19F1C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1789A3-3AFC-4AB4-95D0-5DC6A19F1C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1789A3-3AFC-4AB4-95D0-5DC6A19F1C1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01A5EEF1-E216-47E7-B19E-2380BA878C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01A5EEF1-E216-47E7-B19E-2380BA878C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01A5EEF1-E216-47E7-B19E-2380BA878C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01A5EEF1-E216-47E7-B19E-2380BA878C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89C2CEAF-C951-41EB-9F1F-DDB302683F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C2CEAF-C951-41EB-9F1F-DDB302683F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C2CEAF-C951-41EB-9F1F-DDB302683F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C2CEAF-C951-41EB-9F1F-DDB302683F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2274E91-9364-4CFE-BFEF-32A7461671D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2274E91-9364-4CFE-BFEF-32A7461671D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2274E91-9364-4CFE-BFEF-32A7461671D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2274E91-9364-4CFE-BFEF-32A7461671D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
