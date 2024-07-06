@@ -12,6 +12,7 @@
         <PackageReference Include="FruityFoundation.Base" Version="1.12.0" />
         <PackageReference Include="FruityFoundation.DataAccess.Core" Version="1.12.0" />
         <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.6" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="7.2.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
         <PackageReference Include="System.Linq.Async" Version="6.0.1" />
     </ItemGroup>
@@ -27,6 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PixelClicker.Infra.DatabaseMaintenance\PixelClicker.Infra.DatabaseMaintenance.csproj" />
       <ProjectReference Include="..\PixelClicker.Infra.Repository\PixelClicker.Infra.Repository.fsproj" />
     </ItemGroup>
 

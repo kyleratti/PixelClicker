@@ -2,12 +2,16 @@ using FruityFoundation.DataAccess.Abstractions;
 using FruityFoundation.DataAccess.Core;
 using Microsoft.Data.Sqlite;
 using PixelClicker.Core.Contracts;
+using PixelClicker.Infra.DatabaseMaintenance;
 using PixelClicker.Infra.Repository;
+using PixelClicker.UI.WebApi.HostedServices;
 using PixelClicker.UI.WebApi.Hubs;
 using PixelClicker.UI.WebApi.Options;
 using PixelClicker.UI.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+ConfigureApplication(builder.Configuration, builder.Environment);
 
 // Add services to the container.
 builder.Services.Configure<PixelCanvasOptions>(builder.Configuration.GetSection("PixelCanvas"));
@@ -24,6 +28,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSignalR();
+
+builder.Services.AddSingleton<MigrationRunner>();
+builder.Services.AddHostedService<MigrationRunnerService>();
 
 var app = builder.Build();
 app.UseDefaultFiles();
@@ -52,6 +59,32 @@ app.MapHub<PixelHub>("/hub");
 app.Run();
 
 return;
+
+static void ConfigureApplication(ConfigurationManager configuration, IHostEnvironment environment)
+{
+	configuration
+		.AddJsonFile("appsettings.json", reloadOnChange: true, optional: false)
+		.AddJsonFile($"appsettings.{environment.EnvironmentName}.json", reloadOnChange: true, optional: true);
+
+	if (environment.IsDevelopment())
+		configuration.AddUserSecrets<Program>();
+
+	var appConfigConnectionString = configuration.GetConnectionString("AzureAppConfig");
+
+	if (string.IsNullOrEmpty(appConfigConnectionString))
+		return;
+
+	configuration.AddAzureAppConfiguration(appConfig =>
+	{
+		appConfig.Connect(appConfigConnectionString)
+			.Select(keyFilter: "PixelClicker:*")
+			.Select(keyFilter: "PixelClicker:*", labelFilter: environment.EnvironmentName)
+			.TrimKeyPrefix("PixelClicker:");
+	});
+
+	if (environment.IsDevelopment())
+		configuration.AddUserSecrets<Program>();
+}
 
 static INonTransactionalDbConnection<TConnectionType> GetDbImplementation<TConnectionType>(IServiceProvider serviceProvider, string connectionStringName) where TConnectionType : ConnectionType
 {
