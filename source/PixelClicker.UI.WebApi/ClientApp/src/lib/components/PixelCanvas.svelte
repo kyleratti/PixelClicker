@@ -28,14 +28,14 @@
 		dispatch("pixelSelected", eventProps);
 	};
 
-	$: tryGetPixelColor = (x: number, y: number) => {
-		if (pixelData[y] === undefined) {
+	const tryGetPixelColor = (pixelData: string[][], x: number, y: number) => {
+		if (!pixelData[y]) {
 			return null;
 		}
 
 		const value = pixelData[y][x];
 
-		if (value === undefined) {
+		if (!value) {
 			return null;
 		}
 
@@ -47,11 +47,13 @@
 	{#each Array.from({ length: height }) as _, y}
 		<tr class="p-0 m-0">
 			{#each Array.from({ length: width }) as _, x}
-				{@const pixelColor = tryGetPixelColor(x, y)}
+				{@const pixelColor = tryGetPixelColor(pixelData, x, y)}
+				{@const effectiveColor = pixelColor ?? defaultColor}
+				{@const showBorder = effectiveColor === defaultColor}
 
 				<td class="p-0 w-max h-max leading-[0]">
-					<Pixel hexColor={pixelColor ?? defaultColor}
-								 showBorder={pixelColor === null || pixelColor === defaultColor}
+					<Pixel hexColor={effectiveColor}
+								 showBorder={showBorder}
 								 on:selected={() => onPixelSelected({ x, y, hexColor: selectedColor })} />
 				</td>
 			{/each}
